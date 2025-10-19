@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnPro - Онлайн курсы программирования</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">
+                <h2>LearnPro</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#courses">🎯 Курсы</a></li>
+                <li><a href="#about">🌟 О нас</a></li>
+                <li><a href="#reviews">💬 Отзывы</a></li>
+                <li><a href="#" class="login-btn" onclick="showLoginModal()">🔐 Войти</a></li>
+                <li><a href="admin.html">👨‍💼 Админка</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Стань востребованным IT-специалистом</h1>
+                <p>Практические курсы с трудоустройством. Начни карьеру в IT с нуля.</p>
+                <button class="cta-btn" onclick="showRegisterModal()">Начать обучение</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2 class="section-title">Популярные курсы</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon">💻</div>
+                    <h3>Fullstack-разработка</h3>
+                    <p>JavaScript, React, Node.js, MongoDB</p>
+                    <ul class="course-features">
+                        <li>⏱️ 6 месяцев</li>
+                        <li>📚 120 уроков</li>
+                        <li>👨‍🏫 Поддержка куратора</li>
+                        <li>🎓 Сертификат</li>
+                    </ul>
+                    <div class="price">25 000₽</div>
+                    <button class="course-btn" onclick="showRegisterModal()">Выбрать курс</button>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-icon">📱</div>
+                    <h3>Мобильная разработка</h3>
+                    <p>React Native, iOS & Android</p>
+                    <ul class="course-features">
+                        <li>⏱️ 5 месяцев</li>
+                        <li>📚 100 уроков</li>
+                        <li>👨‍🏫 Поддержка куратора</li>
+                        <li>🎓 Сертификат</li>
+                    </ul>
+                    <div class="price">22 000₽</div>
+                    <button class="course-btn" onclick="showRegisterModal()">Выбрать курс</button>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-icon">🎨</div>
+                    <h3>UI/UX Дизайн</h3>
+                    <p>Figma, Adobe XD, Прототипирование</p>
+                    <ul class="course-features">
+                        <li>⏱️ 4 месяца</li>
+                        <li>📚 80 уроков</li>
+                        <li>👨‍🏫 Поддержка куратора</li>
+                        <li>🎓 Сертификат</li>
+                    </ul>
+                    <div class="price">18 000₽</div>
+                    <button class="course-btn" onclick="showRegisterModal()">Выбрать курс</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Преподаватели-практики</h3>
+                    <p>Наши преподаватели работают в ведущих IT-компаниях</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💼</div>
+                    <h3>Трудоустройство</h3>
+                    <p>Помогаем с составлением резюме и подготовкой к собеседованиям</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Практика</h3>
+                    <p>80% времени уделяем практическим заданиям и реальным проектам</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Регистрация</h2>
+            <p>Создайте аккаунт для доступа ко всем курсам</p>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <input type="text" id="firstName" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="lastName" placeholder="Фамилия" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <button type="submit" class="submit-btn">Создать аккаунт</button>
+            </form>
+
+            <div class="auth-footer">
+    <p>Нет аккаунта? <a href="#" onclick="showRegisterModal(); closeLoginModal()">Зарегистрироваться</a></p>
+    <p><a href="reset-password.html">Забыли пароль?</a></p>
+</div>
+            <div id="registerStatus" class="status-message"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Вход в кабинет</h2>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <input type="text" id="loginEmail" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="loginPassword" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="submit-btn">Войти</button>
+            </form>
+            
+            <div id="loginStatus" class="status-message"></div>
+            
+            <div class="auth-footer">
+                <p>Нет аккаунта? <a href="#" onclick="showRegisterModal(); closeLoginModal()">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credentials Modal -->
+    <div id="credentialsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCredentialsModal()">&times;</span>
+            <h2>✅ Аккаунт создан!</h2>
+            
+            <div id="credentialsStatus" class="status-message status-success">
+                ✅ Аккаунт успешно создан! Сохраните данные ниже.
+            </div>
+            
+            <div class="credentials-info">
+                <div class="credential-item">
+                    <label>Логин:</label>
+                    <span id="displayLogin">-</span>
+                </div>
+                <div class="credential-item">
+                    <label>Пароль:</label>
+                    <span id="displayPassword">-</span>
+                </div>
+                <div class="credential-item">
+                    <label>Email:</label>
+                    <span id="displayEmail">-</span>
+                </div>
+            </div>
+            
+            <div class="credentials-warning">
+                <p>⚠️ Сохраните эти данные! Они потребуются для входа.</p>
+            </div>
+            
+            <button class="submit-btn" onclick="closeCredentialsModal(); showLoginModal();">
+                Войти в кабинет
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>LearnPro</h3>
+                    <p>Ваш путь к IT-профессии</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <p>📧 support@learnpro.ru</p>
+                    <p>📞 +7 (999) 123-45-67</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LearnPro. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель - LearnPro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .users-table {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1fr 0.5fr;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1fr 0.5fr;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-light);
+            align-items: center;
+        }
+        
+        .table-row:hover {
+            background: #f8fafc;
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .user-avatar-small {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .courses-count {
+            background: var(--primary-light);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .delete-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .no-users {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray);
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            background: white;
+            border: 2px solid var(--gray-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .action-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .search-box {
+            max-width: 400px;
+            margin: 0 auto 2rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .table-header, .table-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            
+            .mobile-hidden {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">
+                <h2>LearnPro</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Главная</a></li>
+                <li><a href="dashboard.html">📊 Кабинет</a></li>
+                <li><a href="courses.html">🎓 Курсы</a></li>
+                <li><a href="#" class="logout-btn" onclick="logout()">🚪 Выйти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Admin Panel -->
+    <section class="admin-container">
+        <div class="container">
+            <div class="admin-header">
+                <h1 class="section-title">👨‍💼 Панель администратора</h1>
+                <p>Управление пользователями платформы</p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalUsers">0</div>
+                    <div>Всего пользователей</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="activeUsers">0</div>
+                    <div>Активных</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCourses">0</div>
+                    <div>Куплено курсов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayRegistrations">0</div>
+                    <div>Зарегистрировано сегодня</div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="admin-actions">
+                <button class="action-btn" onclick="refreshUsers()">🔄 Обновить</button>
+                <button class="action-btn" onclick="exportUsers()">📊 Экспорт данных</button>
+                <button class="action-btn" onclick="showAllUsers()">👥 Все пользователи</button>
+                <button class="action-btn" onclick="showRecentUsers()">🆕 Новые</button>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск по имени, email или логину..." onkeyup="filterUsers()">
+            </div>
+
+            <!-- Users Table -->
+            <div class="users-table">
+                <div class="table-header">
+                    <div>Пользователь</div>
+                    <div>Контакт</div>
+                    <div class="mobile-hidden">Курсы</div>
+                    <div class="mobile-hidden">Дата регистрации</div>
+                    <div>Статус</div>
+                    <div>Действия</div>
+                </div>
+                
+                <div id="usersList">
+                    <!-- Users will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteUserModal()">&times;</span>
+            <h2>🗑️ Удаление пользователя</h2>
+            
+            <div class="delete-warning">
+                <div class="warning-icon">⚠️</div>
+                <h3>Вы уверены что хотите удалить этого пользователя?</h3>
+                <p>Будут удалены все данные пользователя:</p>
+                <ul>
+                    <li>Профиль и личные данные</li>
+                    <li>История обучения</li>
+                    <li>Приобретенные курсы</li>
+                    <li>Весь прогресс</li>
+                </ul>
+            </div>
+            
+            <div class="user-to-delete" id="userToDeleteInfo">
+                <!-- User info will be inserted here -->
+            </div>
+            
+            <div id="deleteUserStatus" class="status-message"></div>
+            
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeDeleteUserModal()">Отмена</button>
+                <button class="confirm-delete-btn" onclick="confirmDeleteUser()" id="confirmDeleteUserBtn">
+                    Удалить пользователя
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

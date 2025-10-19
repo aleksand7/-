@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог курсов - LearnPro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">
+                <h2>LearnPro</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">📊 Мой кабинет</a></li>
+                <li><a href="courses.html" class="active">🎓 Все курсы</a></li>
+                <li><a href="#profile">👤 Профиль</a></li>
+                <li><a href="#" class="logout-btn" onclick="logout()">🚪 Выйти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Courses Page -->
+    <section class="courses-page">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Выберите свой путь в IT</h1>
+                <p>Профессиональные курсы с трудоустройством</p>
+            </div>
+
+            <!-- Фильтры -->
+            <div class="courses-filter">
+                <button class="filter-btn active" onclick="filterCourses('all')">Все курсы</button>
+                <button class="filter-btn" onclick="filterCourses('programming')">Программирование</button>
+                <button class="filter-btn" onclick="filterCourses('design')">Дизайн</button>
+                <button class="filter-btn" onclick="filterCourses('data')">Data Science</button>
+                <button class="filter-btn" onclick="filterCourses('mobile')">Мобильная разработка</button>
+            </div>
+
+            <!-- Каталог курсов -->
+            <div class="course-catalog" id="courseCatalog">
+                <!-- Курсы загружаются через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal payment-modal">
+        <div class="modal-content compact-payment">
+            <span class="close" onclick="closePaymentModal()">&times;</span>
+            
+            <div class="payment-header">
+                <div class="course-icon-small">💻</div>
+                <div class="payment-course-info">
+                    <h3 id="paymentCourseTitle">Название курса</h3>
+                    <div class="payment-price" id="paymentCoursePrice">0₽</div>
+                </div>
+            </div>
+
+            <div class="compact-payment-form">
+                <div class="payment-methods-compact">
+                    <div class="payment-method-compact selected" data-method="card" onclick="selectPaymentMethod('card')">
+                        <span class="method-icon">💳</span>
+                        <span class="method-name">Карта</span>
+                    </div>
+                    <div class="payment-method-compact" data-method="yoomoney" onclick="selectPaymentMethod('yoomoney')">
+                        <span class="method-icon">💰</span>
+                        <span class="method-name">ЮMoney</span>
+                    </div>
+                </div>
+
+                <div id="cardForm" class="card-form">
+                    <div class="form-group-compact">
+                        <label>Номер карты</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+
+                    <div class="form-row-compact">
+                        <div class="form-group-compact">
+                            <label>Срок действия</label>
+                            <input type="text" id="cardExpiry" placeholder="ММ/ГГ" maxlength="5">
+                        </div>
+                        <div class="form-group-compact">
+                            <label>CVC</label>
+                            <input type="text" id="cardCvc" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+
+                    <div class="form-group-compact">
+                        <label>Имя владельца</label>
+                        <input type="text" id="cardHolder" placeholder="IVAN IVANOV">
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <div class="order-line">
+                        <span>Курс:</span>
+                        <span id="summaryCourseName">-</span>
+                    </div>
+                    <div class="order-line">
+                        <span>Сумма:</span>
+                        <span id="finalAmount">0₽</span>
+                    </div>
+                    <div class="order-total">
+                        <span>Итого:</span>
+                        <span id="totalAmount">0₽</span>
+                    </div>
+                </div>
+
+                <button class="pay-now-btn-compact" onclick="processPayment()">
+                    <span class="btn-icon">💳</span>
+                    <span class="btn-text">Оплатить</span>
+                    <span class="btn-amount" id="paymentAmount">0₽</span>
+                </button>
+
+                <div class="payment-security">
+                    <div class="security-info">
+                        <span class="lock-icon">🔒</span>
+                        <span>Безопасная оплата</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="courses.js"></script>
+</body>
+</html>
