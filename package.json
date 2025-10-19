@@ -1,19 +1,18 @@
 {
   "name": "learnpro-platform",
   "version": "1.0.0",
-  "description": "Онлайн платформа обучения LearnPro",
+  "description": "Online learning platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "build": "echo 'No build process needed'"
   },
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "nodemailer": "^6.9.7",
-    "body-parser": "^1.20.2"
+    "nodemailer": "^6.9.7"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   }
 }
